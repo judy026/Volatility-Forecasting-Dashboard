@@ -37,31 +37,9 @@ popular_tickers = [
 selected_ticker = st.sidebar.selectbox(
     "Search or select ticker", options=popular_tickers
 )
-
 st.sidebar.success(f"Selected Ticker : {selected_ticker}")
-# st.sidebar.subheader("Multiple Stock Comparison")
-# compare_tickers = st.sidebar.multiselect(
-#     "Select Multiple Stickers",
-#     options=popular_tickers, default=["HDFCBANK.NS", "AAPL"]
-# )
 start = st.sidebar.date_input("Start Date",pd.to_datetime("2008-01-01"))
 end = st.sidebar.date_input("End Date",datetime.today().date())
-#comparison_data = {}
-# for tkr in compare_tickers:
-#     data = yf.download(tkr,start=start,end=end)
-#     returns = 100*np.log(data['Close']/data['Close'].shift(1)).dropna()
-#     comparison_data[tkr] = returns
-    
-# st.subheader("Volatility Comparison")
-# vol_df = pd.DataFrame(comparison_data)
-# st.line_chart(vol_df)
-
-# rolling_vol = vol_df.rolling(20).std()
-# st.subheader("Rolling Volatility (20 days)")
-# st.line_chart(rolling_vol)
-#ticker = st.sidebar.text_input("Enter Stock Symbol","HDFCBANK.NS")
-
-
 data = yf.download(selected_ticker,start=start,end=end)
 returns = 100*np.log(data['Close']/data['Close'].shift(1)).dropna()
 #st.write(f"Raw Returns : {returns}")
